@@ -2,7 +2,7 @@
   "mode": "production",
   "schedule": "*/30 * * * * *",
   "chainSelectorName": "ethereum-testnet-sepolia",
-  "payrollAddress": "0x2AEc0c1942032ce70f390e729a01fE95310bf3B7",
-  "receiverAddress": "0x621f513420290036Eca814aa0b3359CAeE6F8Ac6",
+  "payrollAddress": "0x7CA5c73607990B30f037b3fA25ace04fd45F7928",
+  "receiverAddress": "0x04b84857e94558b3FcD51eE00f8Dbc3D009a528D",
   "gasLimit": "500000"
 }

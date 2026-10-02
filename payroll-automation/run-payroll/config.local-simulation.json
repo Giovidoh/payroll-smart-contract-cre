@@ -2,5 +2,5 @@
   "mode": "local-simulation",
   "schedule": "*/30 * * * * *",
   "chainSelectorName": "ethereum-testnet-sepolia",
-  "payrollAddress": "0x2AEc0c1942032ce70f390e729a01fE95310bf3B7"
+  "payrollAddress": "0x7CA5c73607990B30f037b3fA25ace04fd45F7928"
 }
