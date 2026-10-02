@@ -1,0 +1,18 @@
+# Secrets: CRE_ETH_PRIVATE_KEY and RPC keys
+.env
+*.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# CRE build output
+.cre_build_tmp.js
+*.wasm
+dist/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
