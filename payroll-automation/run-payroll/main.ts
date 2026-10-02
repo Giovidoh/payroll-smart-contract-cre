@@ -60,6 +60,13 @@ const configSchema = z.discriminatedUnion("mode", [
 
 export type Config = z.infer<typeof configSchema>;
 
+/**
+ * `ReceiverContractExecutionStatus.REVERTED` of the EVM capability
+ * (RECEIVER_CONTRACT_EXECUTION_STATUS_REVERTED = 1). The SDK exports the enum
+ * for Solana only, so the value is restated here.
+ */
+const RECEIVER_REVERTED = 1;
+
 const payrollAbi = parseAbi([
   "function getLastPayrollTimestamp() view returns (uint256)",
   "function getPayrollInterval() view returns (uint256)",
@@ -152,6 +159,15 @@ export const onCronTrigger = (runtime: Runtime<Config>): string => {
   }
 
   const txHash = bytesToHex(write.txHash);
+
+  // The forwarder transaction succeeds even when the receiver reverts: it
+  // catches the failure and records it in its ReportProcessed event. The
+  // payroll only ran if the receiver itself succeeded.
+  if (write.receiverContractExecutionStatus === RECEIVER_REVERTED) {
+    runtime.log(`REVERTED: relay or payroll refused the report, ${txHash}`);
+    throw new Error(`receiver reverted in ${txHash}`);
+  }
+
   runtime.log(`PAID: ${txHash}`);
   return JSON.stringify({ ...outcome, status: "PAID", txHash });
 };
